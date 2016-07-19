@@ -1,0 +1,20 @@
+<header>
+    <div class="wrapper grid">
+        <h1 class="grid-item"><a href="./">{{title}}</a></h1>
+
+        <div class="grid-item align-right">
+            {{#if:authorId}}<a href="{{#link:./?action=dashboard&form=signout}}" class="icon-sign-out dashboard-link" id="sign-out" title="Sign Out"></a>{{#endif}}
+        </div>
+    </div>
+
+    <div class="navigation-separator wrapper">
+        {{#if:authorId}}<nav class="grid-item">
+            <ul>
+                <li><a href="{{#link:./?action=dashboard}}">Blog Settings</a></li>
+                <li><a href="{{#link:./?action=dashboard&form=author}}">Author Details</a></li>
+                <li><a href="{{#link:./?action=dashboard&view=posts}}">Manage Posts</a></li>
+                <li><a href="{{#link:./?action=dashboard&view=pages}}">Manage Pages</a></li>
+            </ul>
+        </nav>{{#else}}<p class="body-text">Please sign in.</p>{{#endif}}
+    </div>
+</header>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    {{>head}}
+
+    <body class="dashboard">
+        {{>dashboard/header}}
+
+        <main>
+            <div class="wrapper">
+                <h2>{{pageTitle}}</h2>
+
+                <p><a href="{{#link:./?action=dashboard&form=post}}" class="button button-small">New Post</a></p>
+
+                {{#if:posts}}<table class="align-center"><tbody>
+                {{#foreach:posts}}<tr><td><a href="{{#link:./?action=post&slug={{slug}}}}" target="_blank">{{title}}</a></td><td>{{formattedDate}}</td><td><a href="{{#link:./?action=dashboard&form=post&post={{slug}}}}">Edit</a></td><td><a href="{{#link:./?action=dashboard&form=deletepost&post={{slug}}}}">Delete</a></td></tr>{{#endforeach}}
+                </tbody></table>
+                {{#else}}<p class="body-text">No posts to manage.</p>{{#endif}}
+            </div>
+        </main>
+
+        {{>dashboard/scripts}}
+    </body>
+</html>

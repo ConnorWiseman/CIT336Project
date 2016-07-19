@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    {{>head}}
+
+    <body>
+        {{>header}}
+
+        <main>
+            <section>
+                <div class="wrapper">
+                    <h2>{{pageTitle}}</h2>
+                    <p class="body-text">Every static page on {{title}}.</p>
+                </div>
+                <div class="wrapper">
+                    {{#if:pageList}}
+                    <ul>
+                        {{#foreach:pageList}}<li><a href="{{#link:./?action=page&slug={{slug}}}}">{{title}}</a></li>{{#endforeach}}
+                    </ul>
+                    {{#else}}
+                    <p>No pages to display!</p>
+                    {{#endif}}
+                </div>
+            </section>
+        </main>
+
+        {{>footer}}
+    </body>
+</html>

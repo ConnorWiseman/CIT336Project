@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    {{>head}}
+
+    <body class="dashboard">
+        {{>dashboard/header}}
+
+        <main>
+            <div class="wrapper">
+                <h2>Settings</h2>
+                {{#if:errors}}<h3>The following error(s) have occurred:</h3>
+                <div class="body-text">
+                    <ul>
+                        {{#foreach:errors}}<li>{{message}}</li>{{#endforeach}}
+                    </ul>
+                </div>{{#endif}}
+
+                <form class="dashboard-form-wide body-text" action="{{#link:./?action=dashboard&form=settings}}" method="post" autocomplete="off">
+                    <div class="field-wrapper">
+                        <label for="title">Blog Title</label>
+                        <div class="field">
+                            <input value="{{settingsTitle}}" maxlength="255" type="text" id="title" name="title" placeholder="Blog title" required />
+                        </div>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="description">Description</label>
+                        <div class="field">
+                            <input value="{{settingsDescription}}" maxlength="255" type="text" id="description" name="description" placeholder="Description" required />
+                        </div>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="posts_per_page">Posts per Page</label>
+                        <div class="field">
+                            <input value="{{settingsPosts}}" type="number" min="1" max="10" id="posts_per_page" name="posts_per_page" placeholder="Posts per page" required />
+                        </div>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="pretty">Pretty Links</label>
+                        <div class="field">
+                            <div class="pretty">
+                                <input type="checkbox" name="pretty" id="pretty" {{#if:settingsPretty}}checked {{#endif}}/>
+                                <label class="pretty-label" for="pretty"></label>
+                            </div>
+                        </div>
+                        <p class="field-info">Enabling the pretty links setting requires additional backend configuration that may not be available on all hosts. Config is similar to WordPress's <a href="https://codex.wordpress.org/Using_Permalinks#Using_.22Pretty.22_permalinks">pretty permalinks</a>. Setup instructions: <a href="https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/#front-controller-pattern-web-apps">Nginx</a>/<a href="https://www.google.com/">Anything else</a></p>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="colophon">Colophon</label>
+                        <div class="field">
+                            <textarea name="colophon" id="colophon">{{settingsColophon}}</textarea>
+                        </div>
+                    </div>
+
+                    <input type="hidden" value="{{authToken}}" name="auth_token" />
+                    <button class="button button-large button-wide">Update</button>
+                </form>
+            </div>
+        </main>
+
+        {{>dashboard/scripts}}
+    </body>
+</html>

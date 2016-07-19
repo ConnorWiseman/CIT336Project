@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    {{>head}}
+
+    <body>
+        {{>header}}
+
+        <main>
+            <section>
+                <div class="wrapper">
+                    <h2>Posts</h2>
+                </div>
+
+                <div class="wrapper">
+                    <div class="pagination">
+                        {{#if:prevLink}}<a href="{{#link:./?action=posts&page={{prevLink}}}}">&laquo; Previous</a>{{#endif}}
+                        {{#if:nextLink}}<a href="{{#link:./?action=posts&page={{nextLink}}}}">Next &raquo;</a>{{#endif}}
+                    </div>
+                </div>
+
+                <div class="wrapper">
+                    {{#if:postList}}
+                    <ul>
+                        {{#foreach:postList}}<li>
+                            <article>
+                                <header class="post-header">
+                                    <h3><a href="{{#link:./?action=post&slug={{postSlug}}}}">{{title}}</a></h3>
+                                    <p class="body-text">by <a href="{{#link:./?action=author&slug={{authorSlug}}}}">{{name}}</a> on {{formattedDate}}</p>
+                                </header>
+
+                                <div class="post-contents body-text">{{contents}}</div>
+
+                                <footer>
+                                    <p class="body-text"><a href="{{#link:./?action=post&slug={{postSlug}}}}">Read the full post</a></p>
+                                </footer>
+                            </article>
+                        </li>{{#endforeach}}
+                    </ul>
+                    {{#else}}
+                    <p>No posts to display!</p>
+                    {{#endif}}
+                </div>
+
+                <div class="wrapper">
+                    <div class="pagination">
+                        {{#if:prevLink}}<a href="{{#link:./?action=posts&page={{prevLink}}}}">&laquo; Previous</a>{{#endif}}
+                        {{#if:nextLink}}<a href="{{#link:./?action=posts&page={{nextLink}}}}">Next &raquo;</a>{{#endif}}
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        {{>footer}}
+    </body>
+</html>

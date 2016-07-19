@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    {{>head}}
+
+    <body>
+        {{>header}}
+
+        <main>
+            {{#if:postList}}
+            <section>
+                <div class="wrapper">
+                    <ul>
+                        {{#foreach:postList}}<li>
+                            <article>
+                                <header class="post-header">
+                                    <h3><a href="{{#link:./?action=post&slug={{postSlug}}}}">{{title}}</a></h3>
+                                    <p class="body-text">by <a href="{{#link:./?action=author&slug={{authorSlug}}}}">{{name}}</a> on {{formattedDate}}</p>
+                                </header>
+
+                                <div class="post-contents body-text">{{contents}}</div>
+
+                                <footer>
+                                    <p class="body-text"><a href="{{#link:./?action=post&slug={{postSlug}}}}">Read the full post</a></p>
+                                </footer>
+                            </article>
+                        </li>{{#endforeach}}
+                    </ul>
+                </div>
+            </section>
+
+            <section class="alternate">
+                <div class="wrapper align-center">
+                    <a class="button button-large button-center" href="{{#link:./?action=posts}}">Read More</a>
+                </div>
+            </section>
+            {{#else}}
+            <section>
+                <div class="wrapper">
+                    <p>No posts to display!</p>
+                </div>
+            </section>
+            {{#endif}}
+        </main>
+
+        {{>footer}}
+    </body>
+</html>

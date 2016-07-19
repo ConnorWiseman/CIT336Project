@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    {{>head}}
+
+    <body class="dashboard">
+        {{>dashboard/header}}
+
+        <main>
+            <div class="wrapper">
+                <h2>Sign Out</h2>
+                {{#if:errors}}<h3>The following error(s) have occurred:</h3>
+                    <div class="body-text">
+                        <ul>
+                            {{#foreach:errors}}<li>{{message}}</li>{{#endforeach}}
+                        </ul>
+                    </div>{{#endif}}
+                <form class="dashboard-form body-text" action="{{#link:./?action=dashboard&form=signout}}" method="post">
+                    <input type="hidden" value="{{authToken}}" name="auth_token" />
+                    <button class="button button-large button-wide">Sign Out</button>
+                </form>
+            </div>
+        </main>
+
+        {{>dashboard/scripts}}
+    </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    {{>head}}
+
+    <body class="dashboard">
+        {{>dashboard/header}}
+
+        <main>
+            <div class="wrapper">
+                <h2>{{pageTitle}}</h2>
+                {{#if:errors}}<h3>The following error(s) have occurred:</h3>
+                <div class="body-text">
+                    <ul>
+                        {{#foreach:errors}}<li>{{message}}</li>{{#endforeach}}
+                    </ul>
+                </div>{{#endif}}
+
+                {{#if:message}}<p class="success-message">{{message}}</p>{{#endif}}
+
+                <form class="dashboard-form-wide body-text" action="{{#link:./?action=dashboard&form=author}}" method="post" autocomplete="off">
+                    <div class="field-wrapper">
+                        <label for="email">Email address</label>
+                        <div class="field">
+                            <input maxlength="191" type="email" id="email" name="email" placeholder="Email address" value="{{email}}" required />
+                        </div>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="name">Name</label>
+                        <div class="field">
+                            <input maxlength="255" type="text" id="name" name="name" placeholder="Name" value="{{name}}" required />
+                        </div>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="biography">Biography</label>
+                        <div class="field">
+                            <textarea name="biography" id="biography" class="tall">{{#if:biography}}{{biography}}{{#endif}}</textarea>
+                        </div>
+                    </div>
+
+                    <input type="hidden" value="{{authToken}}" name="auth_token" />
+                    <button class="button button-large button-wide">Update</button>
+                </form>
+
+                <p><a href="{{#link:./?action=dashboard&form=password}}">Change password</a></p>
+            </div>
+        </main>
+
+        {{>dashboard/scripts}}
+    </body>
+</html>

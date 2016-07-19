@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    {{>head}}
+
+    <body class="dashboard">
+        {{>dashboard/header}}
+
+        <main>
+            <div class="wrapper">
+                <h2>{{pageTitle}}</h2>
+                {{#if:errors}}<h3>The following error(s) have occurred:</h3>
+                <div class="body-text">
+                    <ul>
+                        {{#foreach:errors}}<li>{{message}}</li>{{#endforeach}}
+                    </ul>
+                </div>{{#endif}}
+
+                {{#if:message}}<p class="success-message">{{message}}</p>{{#endif}}
+
+                <form class="dashboard-form-wide body-text" action="{{#link:./?action=dashboard&form=page{{#if:formSlug}}&slug={{formSlug}}{{#endif}}}}" method="post" autocomplete="off">
+                    <div class="field-wrapper">
+                        <label for="title">Page Title</label>
+                        <div class="field">
+                            <input maxlength="255" type="text" id="title" name="title" placeholder="Page title" value="{{formTitle}}" required />
+                        </div>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="description">Description</label>
+                        <div class="field">
+                            <input maxlength="255" type="text" id="description" name="description" placeholder="Description" value="{{formDescription}}" required />
+                        </div>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="pretty">Display in Menu</label>
+                        <div class="field">
+                            <div class="pretty">
+                                <input type="checkbox" name="display" id="display" {{#if:formDisplay}}checked {{#endif}}/>
+                                <label class="pretty-label" for="display"></label>
+                            </div>
+                        </div>
+                        <p class="field-info">Enabling this option will display a link to the page in the blog's navigation menu.</p>
+                    </div>
+
+                    <div class="field-wrapper">
+                        <label for="contents">Contents</label>
+                        <div class="field">
+                            <textarea name="contents" id="contents" class="tall">{{#if:formContents}}{{formContents}}{{#endif}}</textarea>
+                        </div>
+                    </div>
+
+                    <input type="hidden" value="{{authToken}}" name="auth_token" />
+                    <button class="button button-large button-wide">Submit</button>
+                </form>
+            </div>
+        </main>
+
+        {{>dashboard/scripts}}
+    </body>
+</html>

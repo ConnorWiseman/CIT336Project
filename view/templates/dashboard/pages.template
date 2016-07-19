@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    {{>head}}
+
+    <body class="dashboard">
+        {{>dashboard/header}}
+
+        <main>
+            <div class="wrapper">
+                <h2>Manage Pages</h2>
+
+                <p><a href="{{#link:./?action=dashboard&form=page}}" class="button button-small">New Page</a></p>
+
+                {{#if:pages}}<table class="align-center"><tbody>
+                {{#foreach:pages}}<tr><td><a href="{{#link:./?action=page&slug={{slug}}}}" target="_blank">{{title}}</a></td><td><a href="{{#link:./?action=dashboard&form=page&page={{slug}}}}">Edit</a></td><td><a href="{{#link:./?action=dashboard&form=deletepage&page={{slug}}}}">Delete</a></td></tr>{{#endforeach}}
+                </tbody></table>
+                {{#else}}<p class="body-text">No pages to manage.</p>{{#endif}}
+            </div>
+        </main>
+
+        {{>dashboard/scripts}}
+    </body>
+</html>

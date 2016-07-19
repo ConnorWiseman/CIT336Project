@@ -1,0 +1,16 @@
+<head>
+    <title>{{#if:pageTitle}}{{pageTitle}} | {{title}}{{#else}}{{title}}{{#endif}}</title>
+    <meta charset="utf-8" />
+    {{#if:metaDesc}}<meta name="description" content="{{metaDesc}}" />{{#endif}}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--
+        This is necessary due to the front-end controller URI pattern the
+        application may use.
+    -->
+    <base href="{{baseHref}}">
+
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/icons.css" />
+</head>

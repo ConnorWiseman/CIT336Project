@@ -1,0 +1,75 @@
+<script>
+// Wrap everything in an immediately executed function to prevent leaking into
+// the global namespace.
+(function() {
+
+
+  /**
+   * A utility object for making JavaScript XMLHttpRequests. I think I only
+   * ever actually use the POST one, though.
+   */
+  var Request = {
+    instance: new (XMLHttpRequest || ActiveXObject)('MSXML2.XMLHTTP.3.0'),
+
+    get: function(url, callback) {
+      var request = this.instance;
+      request.open('GET', url);
+      request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    	request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      request.onreadystatechange = function() {
+        if (request.readyState > 3 && callback && typeof(callback) == 'function') {
+          callback(request.responseText);
+        }
+      }
+      request.send();
+    },
+
+    post: function(data, url, callback) {
+
+      if (typeof data === 'object') {
+        var d = '';
+        for (var item in data) {
+          d += '&' + encodeURIComponent(item) + '=' + encodeURIComponent(data[item]);
+        }
+        data = d.slice(1);
+      }
+
+      var request = this.instance;
+      request.open('POST', url);
+      request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+      request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      request.onreadystatechange = function() {
+        if (request.readyState > 3 && callback && typeof(callback) == 'function') {
+          callback(request.responseText);
+        }
+      }
+      request.send(data);
+    }
+  }
+
+
+  // Wait for the document to load completely.
+  document.addEventListener('DOMContentLoaded', function(e) {
+    // We need the user's auth key and the sign out link.
+    var authToken = '{{authToken}}';
+    var signOut = document.getElementById('sign-out');
+
+    if (signOut) {
+      // When the user clicks the sign out link...
+      signOut.addEventListener('click', function(e) {
+        // Prevent default behavior, then POST a request to the sign out form.
+        e.preventDefault();
+
+        var data = {
+          auth_token: authToken
+        };
+
+        Request.post(data, '{{#link:./?action=dashboard&form=signout}}', function(data) {
+          // If successful, redirect to the application index.
+          window.location = './';
+        });
+      });
+    }
+  });
+})();
+</script>

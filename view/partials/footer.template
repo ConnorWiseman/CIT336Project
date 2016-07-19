@@ -1,0 +1,20 @@
+<footer>
+    <div class="wrapper grid">
+        <div class="grid-item">
+            <p class="body-text">{{colophon}}</p>
+        </div>
+        <div class="grid-item align-right">
+            <p class="body-text">Quisque vulputate vehicula mauris a pretium. Nulla in bibendum est. Maecenas fringilla gravida vulputate.</p>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <nav class="body-text align-right slash-separated">
+            <ul>
+                <li><a href="{{#link:./?action=posts}}">Posts</a></li>
+                <li><a href="{{#link:./?action=pages}}">Pages</a></li>
+                <li><a href="{{#link:./?action=dashboard}}">Dashboard</a></li>
+            </ul>
+        </nav>
+    </div>
+</footer>

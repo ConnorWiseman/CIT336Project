@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    {{>head}}
+
+    <body>
+        {{>header}}
+
+        <main>
+            <section>
+                <div class="wrapper">
+                    <h2>An error has occurred</h2>
+                    <p class="body-text">{{errorMessage}}</p>
+                    <p class="body-text"><a href="./">Return to the index</a></p>
+                </div>
+            </section>
+        </main>
+
+        {{>footer}}
+    </body>
+</html>

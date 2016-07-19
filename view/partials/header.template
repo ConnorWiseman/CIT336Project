@@ -1,0 +1,25 @@
+<header{{#if:splashPage}} id="splash-page"{{#endif}}>
+    <div class="wrapper grid">
+        <h1 class="grid-item"><a href="./">{{title}}</a></h1>
+
+        <div class="grid-item align-right">
+            <a href="{{#link:./?action=dashboard}}" class="icon icon-bars dashboard-link"></a>
+        </div>
+    </div>
+
+
+    <div class="wrapper navigation-separator">
+        {{#if:pages}}<nav class="grid-item">
+            <ul>
+                {{#foreach:pages}}<li><a href="{{#link:./?action=page&name={{slug}}}}">{{title}}</a></li>{{#endforeach}}
+            </ul>
+        </nav>{{#endif}}
+    </div>
+
+
+    {{#if:splashPage}}<div class="wrapper">
+        <div class="teaser align-center">
+            <p>{{description}}</p>
+        </div>
+    </div>{{#endif}}
+</header>
